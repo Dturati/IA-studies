@@ -1,30 +1,37 @@
-import torch
 import numpy as np
 
 data = np.array([
-    [0, 0],
-    [1, 1],
-    [0, 1],
-    [1, 0]
+    [0, 0, 0],
+    [1, 0, 0],
+    [0, 1, 0],
+    [1, 1, 0],
+    [0, 0, 1],
+    [1, 0, 1],
+    [0, 1, 1],
+    [1, 1, 1],
 ])
 
 res = np.array([
     [0],
-    [1],
     [0],
-    [0]
+    [0],
+    [1],
+    [1],
+    [1],
+    [1],
+    [1],
 ])
 
 
-def cuda_avaliable() -> bool:
-    return torch.cuda.is_available()
+# def cuda_avaliable() -> bool:
+#     return torch.cuda.is_available()
 
 
 class Percepetron:
     def __init__(self):
-        self.weigth = np.random.uniform(0, 1, 3)
+        self.weigth = np.random.uniform(0, 1, 4)
         self.alpha = 0.1
-        self.epochs = 20
+        self.epochs = 100
 
     def step(self, value):
         return 1 if value > 0 else 0
@@ -47,16 +54,19 @@ class Percepetron:
 
 if __name__ == '__main__':
     perceptron = Percepetron()
-    print(cuda_avaliable())
+    # print(perceptron.weigth)
+    # print(cuda_avaliable())
     perceptron.training(data=data, res=res)
 
     print("Results")
 
     data = np.array([
-        [1, 1],
-        [1, 1],
-        [0, 0],
-        [0, 0]
+        [1, 0, 1],
+
+    ])
+
+    res = np.array([
+        [0]
     ])
     for x, y in zip(data, res):
         prediction = perceptron.predict(x)

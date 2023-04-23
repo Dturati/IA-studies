@@ -10,6 +10,8 @@ packages = [{include = "cnn_test"}]
 python = "^3.10"
 numpy = "^1.24.2"
 black = "^23.1.0"
+pillow = "^9.5.0"
+matplotlib = "^3.7.1"
 
 
 [build-system]

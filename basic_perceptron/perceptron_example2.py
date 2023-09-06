@@ -14,17 +14,13 @@ data = np.array([
 res = np.array([
     [0],
     [0],
+    [1],
+    [1],
+    [0],
     [0],
     [1],
     [1],
-    [1],
-    [1],
-    [1],
 ])
-
-
-# def cuda_avaliable() -> bool:
-#     return torch.cuda.is_available()
 
 
 class Percepetron:
@@ -47,8 +43,8 @@ class Percepetron:
         for epoch in range(0, self.epochs):
             for x, y in zip(data, res):
                 # act = Activations.sigmoid(np.dot(x, self.weigth))
-                p = self.step(np.dot(x, self.weigth))
-                # p = self.step(act)
+                # p = self.step(np.dot(x, self.weigth))
+                p = Activations.sigmoid(np.dot(x, self.weigth))
                 if p != y:
                     error = p - y
                     self.weigth += -self.alpha * error * x
@@ -56,21 +52,16 @@ class Percepetron:
 
 if __name__ == '__main__':
     perceptron = Percepetron()
-    # print(perceptron.weigth)
-    # print(cuda_avaliable())
     perceptron.training(data=data, res=res)
 
     print("Results")
 
     data = np.array([
-        [0, 1, 0],
+        [1, 1, 1],
 
     ])
 
-    res = np.array([
-        [0]
-    ])
-    for x, y in zip(data, res):
+    for x in data:
         prediction = perceptron.predict(x)
-        print("[INFO] data={}, ground-truth={}, pred={}".format(
-            x, y[0], prediction))
+        print("[INFO] data={}, ground-truth={}".format(
+            x, prediction))

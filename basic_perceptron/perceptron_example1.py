@@ -1,5 +1,5 @@
 import numpy as np
-
+from activations import Activations
 
 class Perceptron:
 
@@ -22,7 +22,8 @@ class Perceptron:
         self.epochs = self.epochs
         for epoch in np.arange(0, self.epochs):
             for (x, target) in zip(X, y):
-                p = self.step(np.dot(x, self.W))
+                # p = self.step(np.dot(x, self.W))
+                p = Activations.sigmoid(np.dot(x, self.W))
                 if p != target:
                     error = p - target
                     self.W += -self.alpha * error * x
@@ -39,8 +40,6 @@ if __name__ == "__main__":
 
     # y = np.array([[1]])
     for (x, target) in zip(X, y):
-        # make a prediction on the data point and display the result
-        # to our console
         pred = perceptron.predict(x)
         print("[INFO] data={}, ground-truth={}, pred={}".format(
             x, target[0], pred))

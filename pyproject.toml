@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "ia-studies"
+version = "0.1.0"
+description = ""
+authors = ["Dturati <david.turati.consultor@yandeh.com.br>"]
+readme = "README.md"
+packages = [{include = "ia_studies"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+numpy = "^1.25.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
